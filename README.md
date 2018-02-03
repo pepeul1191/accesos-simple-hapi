@@ -52,6 +52,12 @@ The 7 numbers specify the year, month, day, hour, minute, second, and millisecon
 
     var d = new Date(99, 5, 24, 11, 33, 30, 0);
 
+# Pruebas de Comportamiento
+
+Ejecutar
+  $ cd test/rspec
+  $ rspec spec usuario.rb log.rb
+
 ---
 
 Fuentes:
