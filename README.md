@@ -58,8 +58,9 @@ The 7 numbers specify the year, month, day, hour, minute, second, and millisecon
 ### Pruebas de Comportamiento
 
 Ejecutar
-  $ cd test/rspec
-  $ rspec spec usuario.rb log.rb
+
+    $ cd test/rspec
+    $ rspec spec usuario.rb log.rb
 
 ---
 
