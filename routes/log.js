@@ -1,6 +1,7 @@
 'use strict';
 
 var db = require('../config/database');
+var dateFormat = require('dateformat');
 
 module.exports = [
   {
@@ -30,7 +31,20 @@ module.exports = [
       auth: false
     },
     handler: function (request, reply) {
-      reply(request.params.usuario_id);
+      db.conn.find('logs', {'usuario_id': request.params.usuario_id}, function(err, cursor, count) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        var rs = [];
+        while (cursor.next()) {
+          var date = new Date(cursor.field('momento'));
+          var temp = dateFormat(date, 'yyyy-mm-dd, HH:MM:ss');
+          rs.push(temp);
+        }
+        cursor.close();
+        reply(rs);
+      });
     }
   }
 ];
