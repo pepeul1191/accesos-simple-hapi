@@ -1,4 +1,4 @@
-## Happi JS - EJDB
+## Accesos Simple con HapiJS y EJDB
 
 Instlación de software y dependencias. Adicionalmente hay que tener instalado NodeJS.
 
@@ -22,7 +22,7 @@ Instlación de software y dependencias. Adicionalmente hay que tener instalado N
 
 + Abrir base de datos:
 
-    ejdb > db.open('mydb');
+    ejdb > db.open('accesos');
 
 + Obtener la información de colecciones:
 
@@ -32,19 +32,22 @@ Instlación de software y dependencias. Adicionalmente hay que tener instalado N
 
     ejdb> db.find('colección');
 
-### Formato de Dato Grabado
+### Formato de Usuarios
 
     {
-        'estacion_id':n,
-        'momento':Date,
-        'sensor_id':n,
-        'dato':d
+        '_id': autogenrado
+        'usuario': String,
+        'contrasenia': String,
+        'correo': String
     }
 
-### Reportes
+### Formato de Logs
 
-+ Datos durante todo un día.
-+ Máximo, minimo y promedio entre un rango de días.
+    {
+        '_id': autogenrado
+        'usuario_id': String,
+        'momento': DateTime
+    }
 
 ### Javascript Date
 
