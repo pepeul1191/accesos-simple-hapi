@@ -4,7 +4,7 @@ var db = require('../config/database');
 
 module.exports = [
   {
-  method: 'POST',
+    method: 'POST',
     path: 'acceder',
     config: {
       auth: false
@@ -36,8 +36,8 @@ module.exports = [
         }
         var rs = [];
         while (cursor.next()) {
-          //console.log(cursor.field("name") + " likes toys!");
           var temp = {
+            'id' : cursor.field('_id'),
             'usuario' : cursor.field('usuario'),
             'correo' : cursor.field('correo'),
           }
