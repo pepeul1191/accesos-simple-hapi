@@ -14,8 +14,10 @@ server.connection({
   }
 });
 
-server.ext('onRequest', function(request, reply){
-  //request.response.header('Server', 'Ubuntu');
+server.ext('onPreResponse', function(request, reply){
+  if (request.response.header) {
+      request.response.header('Server', 'Ubuntu');
+  }
   reply.continue();
 });
 

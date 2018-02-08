@@ -1,5 +1,6 @@
-const setHeaders = function (request, reply) {
+const demo = function (request, reply) {
+  console.log("middleware demo");
   return reply.continue();
 };
 
-exports.setHeaders= setHeaders;
+exports.demo= demo;

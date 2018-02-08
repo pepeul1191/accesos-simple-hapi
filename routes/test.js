@@ -10,7 +10,7 @@ module.exports = [
     config: {
       auth: false,
       pre: [
-        { method: middleware.setHeaders},
+        { method: middleware.demo},
       ],
     },
     handler: function (request, reply) {
