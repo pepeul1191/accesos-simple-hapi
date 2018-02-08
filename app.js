@@ -5,6 +5,7 @@ const Path = require('path');
 const Inert = require('inert');
 const HRL = require('hapi-routes-loader');
 const server = new Hapi.Server();
+
 var constants = require('./config/constants');
 
 server.connection({
@@ -49,13 +50,25 @@ server.register(
 });
 
 server.route({
-    method: 'GET',
-    path: '/{param*}',
-    handler: {
-        directory: {
-            path: '.',
-            redirectToSlash: true,
-            index: true,
-        }
+  method: 'GET',
+  path: '/{param*}',
+  handler: {
+    directory: {
+      path: '.',
+      redirectToSlash: true,
+      index: true,
     }
+  }
+});
+
+
+server.route({
+  method: 'GET',
+  path: '/',
+  config: {
+    auth: false,
+  },
+  handler: function (request, reply) {
+    reply('Error: URL vacía');
+  }
 });
