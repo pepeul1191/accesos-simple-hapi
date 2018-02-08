@@ -4,13 +4,13 @@ Instlación de software y dependencias. Adicionalmente hay que tener instalado N
 
     $ sudo add-apt-repository ppa:adamansky/ejdb
     $ sudo apt-get update
-    $ sudo apt-get install ejdb ejdb-dbg gcc clang cmake zlib1g-dev 
+    $ sudo apt-get install ejdb ejdb-dbg gcc clang cmake zlib1g-dev
     $ git clone https://github.com/Softmotions/ejdb.git
     $ cd ejdb
     $ mkdir build
     $ cd build
     $ cmake -DCMAKE_BUILD_TYPE=Release ../
-    $ make 
+    $ make
     $ sudo make install
     $ npm install -g ejdb
 
@@ -72,3 +72,4 @@ Fuentes:
 + http://ejdb.org/doc/cli.html
 + https://stackoverflow.com/questions/7653080/adding-to-an-array-asynchronously-in-node-js
 + https://www.w3schools.com/js/js_dates.asp
++ https://stackoverflow.com/questions/31331606/how-can-i-add-a-middleware-in-my-route

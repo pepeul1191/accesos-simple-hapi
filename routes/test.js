@@ -1,13 +1,17 @@
 'use strict';
 
 var db = require('../config/database');
+var middleware = require('../config/middleware');
 
 module.exports = [
   {
     method: 'GET',
     path: 'conexion',
     config: {
-      auth: false
+      auth: false,
+      pre: [
+        { method: middleware.setHeaders},
+      ],
     },
     handler: function (request, reply) {
       reply('ok');
@@ -38,7 +42,7 @@ module.exports = [
           reply('El usuario de prueba ya se encuentra creado');
         }
       });
-      
+
     }
   }
 ];

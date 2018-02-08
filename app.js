@@ -6,11 +6,16 @@ const HRL = require('hapi-routes-loader');
 const server = new Hapi.Server();
 
 server.connection({
-  host: 'localhost', 
-  port: 5000, 
-  routes: { 
-    cors: true 
+  host: 'localhost',
+  port: 5000,
+  routes: {
+    cors: true
   }
+});
+
+server.ext('onPreResponse', function(request, reply){
+  request.response.header('Server', 'Ubuntu');
+  reply.continue();
 });
 
 server.register([
