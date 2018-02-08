@@ -14,6 +14,7 @@
     "hapi": "^16.5.2",
     "hapi-routes-loader": "^0.2.0",
     "inert": "^4.2.1",
-    "nodemon": "^1.14.1"
+    "nodemon": "^1.14.1",
+    "path": "^0.12.7"
   }
 }

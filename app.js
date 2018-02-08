@@ -1,6 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
+const Path = require('path');
 const Inert = require('inert');
 const HRL = require('hapi-routes-loader');
 const server = new Hapi.Server();
@@ -10,13 +11,16 @@ server.connection({
   host: 'localhost',
   port: 5000,
   routes: {
-    cors: true
+    cors: true,
+    files: {
+      relativeTo: Path.join(__dirname, 'public')
+    }
   }
 });
 
 server.ext('onPreResponse', function(request, reply){
   if (request.response.header) {
-      request.response.header('Server', 'Ubuntu');
+    request.response.header('Server', 'Ubuntu');
   }
   reply.continue();
 });
@@ -42,4 +46,16 @@ server.register(
   server.start((err) => {
     console.log('Running web app at: ' + server.uri);
   });
+});
+
+server.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+        directory: {
+            path: '.',
+            redirectToSlash: true,
+            index: true,
+        }
+    }
 });
