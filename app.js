@@ -4,6 +4,7 @@ const Hapi = require('hapi');
 const Inert = require('inert');
 const HRL = require('hapi-routes-loader');
 const server = new Hapi.Server();
+var constants = require('./config/constants');
 
 server.connection({
   host: 'localhost',
@@ -13,22 +14,29 @@ server.connection({
   }
 });
 
-server.ext('onPreResponse', function(request, reply){
-  request.response.header('Server', 'Ubuntu');
+server.ext('onRequest', function(request, reply){
+  //request.response.header('Server', 'Ubuntu');
   reply.continue();
 });
 
-server.register([
-  Inert,
-  {
-    register: HRL,
-    options: {
-      dirname: __dirname, //must be a string with a root path
-      pathRoutes: '/routes'
-    }
-  },
+server.on('response', function (request) {
+  if (constants.data['ambiente'] == 'desarrollo'){
+    console.log(request.info.remoteAddress + ': ' + request.method.toUpperCase() + ' ' + request.url.path + ' --> ' + request.response.statusCode);
+  }
+});
 
-], (err) => {
+server.register(
+  [
+    Inert,
+    {
+      register: HRL,
+      options: {
+        dirname: __dirname, //must be a string with a root path
+        pathRoutes: '/routes'
+      }
+    },
+
+  ], (err) => {
   server.start((err) => {
     console.log('Running web app at: ' + server.uri);
   });
