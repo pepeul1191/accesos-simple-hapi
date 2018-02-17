@@ -49,7 +49,7 @@ def nombre_repetido
         test.servicios('backend', 'test/conexion')
         expect(test.response.code).to eq(200)
       end
-      it '3.2 Validar nobmre repetido - es repetido' do
+      it '3.2 Validar nombre repetido - es repetido' do
         data = {
           :id =>  'E',
           :usuario => 'pips',
@@ -61,7 +61,7 @@ def nombre_repetido
         expect(test.response.code).to eq(200)
         expect(test.response.body).to eq('1')
       end
-      it '3.3 Validar nobmre repetido - no es repetido' do
+      it '3.3 Validar nombre repetido - no es repetido' do
         data = {
           :id =>  'E',
           :usuario => 'pips2',
@@ -77,6 +77,43 @@ def nombre_repetido
   end
 end
 
+def correo_repetido
+  RSpec.describe App do
+    describe "4. Validar correo repetido: " do
+      it '4.1 Conexión con backend' do
+        test =App.new('')
+        test.servicios('backend', 'test/conexion')
+        expect(test.response.code).to eq(200)
+      end
+      it '4.2 Validar correo repetido - es repetido' do
+        data = {
+          :id =>  'E',
+          :correo => 'pips@ulima.edu.pe',
+        }.to_json
+        url = 'usuario/correo_repetido?data=' + data
+        test =App.new(url)
+        test.post()
+        puts test.response.body
+        expect(test.response.code).to eq(200)
+        expect(test.response.body).to eq('1')
+      end
+      it '4.3 Validar correo repetido - no es repetido' do
+        data = {
+          :id =>  'E',
+          :correo => 'pips@ulima.edu.pex',
+        }.to_json
+        url = 'usuario/correo_repetido?data=' + data
+        test =App.new(url)
+        test.post()
+        puts test.response.body
+        expect(test.response.code).to eq(200)
+        expect(test.response.body).to eq('0')
+      end
+    end
+  end
+end
+
 #usuario_prueba
 #acceder
-nombre_repetido
+#nombre_repetido
+correo_repetido
