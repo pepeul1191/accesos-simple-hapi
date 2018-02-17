@@ -18,6 +18,33 @@ module.exports = [
     },
   },
   {
+    method: 'POST',
+    path: 'nombre_repetido',
+    config: {
+      auth: false
+    },
+    handler: function (request, reply) {
+      var data = JSON.parse(request.query.data);
+      var usuario_id = data['id'];
+      var usuario = data['usuario'];
+      if(usuario_id == 'E'){
+        db.conn.find('usuarios', {'usuario' : usuario}, function(err, cursor, count) {
+          reply(count);
+        });
+      }else{
+        db.conn.find('usuarios', {'usuario' : usuario, 'contrasenia' : contrasenia}, function(err, cursor, count) {
+          if(count == 1){
+            reply(0);
+          }else{
+            db.conn.find('usuarios', {'usuario' : usuario, 'contrasenia' : contrasenia}, function(err, cursor, count) {
+              reply(count);
+            });
+          }
+        });
+      }
+    },
+  },
+  {
     method: 'GET',
     path: 'listar',
     config: {

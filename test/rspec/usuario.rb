@@ -41,5 +41,42 @@ def acceder
   end
 end
 
+def nombre_repetido
+  RSpec.describe App do
+    describe "3. Validar nombre repetido: " do
+      it '3.1 Conexión con backend' do
+        test =App.new('')
+        test.servicios('backend', 'test/conexion')
+        expect(test.response.code).to eq(200)
+      end
+      it '3.2 Validar nobmre repetido - es repetido' do
+        data = {
+          :id =>  'E',
+          :usuario => 'pips',
+        }.to_json
+        url = 'usuario/nombre_repetido?data=' + data
+        test =App.new(url)
+        test.post()
+        #puts test.response.body
+        expect(test.response.code).to eq(200)
+        expect(test.response.body).to eq('1')
+      end
+      it '3.3 Validar nobmre repetido - no es repetido' do
+        data = {
+          :id =>  'E',
+          :usuario => 'pips2',
+        }.to_json
+        url = 'usuario/nombre_repetido?data=' + data
+        test =App.new(url)
+        test.post()
+        #puts test.response.body
+        expect(test.response.code).to eq(200)
+        expect(test.response.body).to eq('0')
+      end
+    end
+  end
+end
+
 #usuario_prueba
-acceder
+#acceder
+nombre_repetido
