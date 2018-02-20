@@ -1,6 +1,7 @@
 'use strict';
 
 var db = require('../config/database');
+var mail = require('../config/mails');
 
 module.exports = [
   {
@@ -27,14 +28,14 @@ module.exports = [
       var correo = request.query.correo;
       db.conn.find('usuarios', {'correo' : correo}, function(err, cursor, count) {
         if(count == 0){
-          reply(count);
+          reply(0);
         }else{
           var contrasenia = null;
           while (cursor.next()) {
             contrasenia = cursor.field('contrasenia');
           }
           cursor.close();
-          reply(contrasenia);
+          reply(mail.contrasenia(contrasenia));
         }
       });
     },
