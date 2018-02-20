@@ -18,6 +18,28 @@ module.exports = [
     },
   },
   {
+    method: 'GET',
+    path: 'contrasenia',
+    config: {
+      auth: false
+    },
+    handler: function (request, reply) {
+      var correo = request.query.correo;
+      db.conn.find('usuarios', {'correo' : correo}, function(err, cursor, count) {
+        if(count == 0){
+          reply(count);
+        }else{
+          var contrasenia = null;
+          while (cursor.next()) {
+            contrasenia = cursor.field('contrasenia');
+          }
+          cursor.close();
+          reply(contrasenia);
+        }
+      });
+    },
+  },
+  {
     method: 'POST',
     path: 'nombre_repetido',
     config: {

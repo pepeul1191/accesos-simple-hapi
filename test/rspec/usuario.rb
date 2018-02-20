@@ -113,7 +113,37 @@ def correo_repetido
   end
 end
 
+def obtener_contrasenia
+  RSpec.describe App do
+    describe "5. Obtener contrasenia de usuario según correo: " do
+      it '5.1 Conexión con backend' do
+        test =App.new('')
+        test.servicios('backend', 'test/conexion')
+        expect(test.response.code).to eq(200)
+      end
+      it '5.2 Obtener contrasenia - existe correo' do
+        data = 'pips@ulima.edu.pe'
+        url = 'usuario/contrasenia?correo=' + data
+        test =App.new(url)
+        test.get()
+        puts test.response.body
+        expect(test.response.code).to eq(200)
+      end
+      it '5.3 Obtener contrasenia - no existe correo' do
+        data = 'pips@ulima.edu.pex'
+        url = 'usuario/contrasenia?correo=' + data
+        test =App.new(url)
+        test.get()
+        puts test.response.body
+        expect(test.response.code).to eq(200)
+        expect(test.response.body).to eq('0')
+      end
+    end
+  end
+end
+
 #usuario_prueba
 #acceder
 #nombre_repetido
-correo_repetido
+#correo_repetido
+obtener_contrasenia
